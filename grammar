@@ -1,0 +1,5 @@
+<eq> => <base> <soma>
+<base> => <valor> <mult>
+<sum> => + <valor> <sum> | epsilon
+<mult> => * <valor> <mult> | epsilon
+<valor> => ( <eq> ) | num 
