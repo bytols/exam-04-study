@@ -70,4 +70,4 @@ int    picoshell(char *cmds[])
     }
     while (wait(NULL) < 0)
     return (0);
-}
+}a
