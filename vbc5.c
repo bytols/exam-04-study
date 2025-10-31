@@ -17,7 +17,7 @@ typedef struct node {
 
 node    *new_node(node n)
 {
-    node *ret = calloc(1, sizeof(ret *));
+    node *ret = calloc(1, sizeof(*ret));
     if (!ret)
         return (NULL);
     *ret = n;
@@ -75,10 +75,10 @@ node    *factor(char **s)
         node *n = parse_expr(s);
         if (!n)
             return (NULL);
-        while (!unexpected(s, ')'))
+        while (!expect(s, ')'))
         {
             destroy_tree(n);
-            return(NULL)
+            return(NULL);
         }
         return(n);
     }
@@ -104,7 +104,7 @@ node    *mul(char **s)
             destroy_tree(left);
             return (NULL);
         }
-        node n = {.type = MULTI, .l = left, .r = right}
+        node n = {.type = MULTI, .l = left, .r = right};
         left = new_node(n);
         if (!left)
             return NULL;
@@ -123,7 +123,7 @@ node    *sum(char **s)
     }
     while (accept(s, '+'))
     {
-        right = mul(s);
+        node *right = mul(s);
         if (!right)
         {
             destroy_tree(left);
@@ -136,7 +136,7 @@ node    *sum(char **s)
             return (NULL);
         }
     }
-    return (left)
+    return (left);
 }
 
 node    *parse_expr(char *s)
